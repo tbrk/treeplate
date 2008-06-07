@@ -77,7 +77,7 @@
     </xsl:apply-templates>
 
     <xsl:apply-templates mode="makelink"
-			 select="(./preceding-sibling::item)[1]">
+			 select="(./preceding-sibling::item[not(@inmenu='no')])[1]">
       <xsl:with-param name="rellink">first</xsl:with-param>
 
       <xsl:with-param name="goback">
@@ -89,7 +89,7 @@
     </xsl:apply-templates>
 
     <xsl:apply-templates mode="makelink"
-			 select="(./preceding-sibling::item)[last()]">
+			 select="(./preceding-sibling::item[not(@inmenu='no')])[last()]">
       <xsl:with-param name="rellink">prev</xsl:with-param>
 
       <xsl:with-param name="goback">
@@ -101,7 +101,7 @@
     </xsl:apply-templates>
 
     <xsl:apply-templates mode="makelink"
-			 select="(./following-sibling::item)[last()]">
+			 select="(./following-sibling::item[not(@inmenu='no')])[last()]">
       <xsl:with-param name="rellink">last</xsl:with-param>
 
       <xsl:with-param name="goback">
@@ -113,7 +113,7 @@
     </xsl:apply-templates>
 
     <xsl:apply-templates mode="makelink"
-			 select="(./following-sibling::item)[1]">
+			 select="(./following-sibling::item[not(@inmenu='no')])[1]">
       <xsl:with-param name="rellink">next</xsl:with-param>
 
       <xsl:with-param name="goback">
