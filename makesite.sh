@@ -26,7 +26,7 @@ dodir () {
 		    lastmod=\"$(stat -t %Y%m%d%H%M%S -f %Sm $f)\"/>"
     done
 
-    for dir in `find $1/* -type d -maxdepth 0`
+    for dir in `find $1/* -type d -maxdepth 0 2> /dev/null`
     do
 	echo "<dir name=\"$(basename $dir)\">"
 	dodir $dir
