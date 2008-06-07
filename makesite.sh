@@ -43,7 +43,7 @@ if [ -d "$SRC" -a -d "$DST" ]; then
      dodir $DST
      echo "</filehier>"
 # With validation:
-#    echo "</hier>") | xsltproc --paths $XSLT/ $XSLT/makesite.xsl -
+#     echo "</hier>") | xsltproc --path $XSLT/ $XSLT/makesite.xsl -
 # No validation:
      echo "</hier>") | xsltproc --novalid $XSLT/makesite.xsl -
 else

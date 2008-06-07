@@ -1,14 +1,14 @@
 <!ENTITY % itemdata "prefix?, suffix?, author?, style?, icon?, link*, keyword*">
 
 <!ELEMENT sitetree        (%itemdata;, rooturl, item*)>
-<!ELEMENT rooturl         CDATA #REQUIRED>
+<!ELEMENT rooturl         (#PCDATA)>
 <!ELEMENT item            (%itemdata;, name, file, item*)>
 <!ATTLIST item directory  CDATA #IMPLIED>
 <!ATTLIST item inmenu     CDATA "yes">
 <!ATTLIST item homelink   CDATA #IMPLIED>
 <!ATTLIST item sitemap    CDATA "yes">
-<!ATTLIST item changefreq CDATA (always|hourly|daily|weekly|
-				 monthly|yearly|never)>
+<!ATTLIST item changefreq (always|hourly|daily|weekly|
+			   monthly|yearly|never) "monthly">
 <!ATTLIST item priority   CDATA "0.5">
 <!ELEMENT prefix          (#PCDATA)>
 <!ELEMENT suffix          (#PCDATA)>
