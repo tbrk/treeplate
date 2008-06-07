@@ -1,0 +1,12 @@
+<!DOCTYPE sitepage SYSTEM "sitepage.dtd">
+<sitepage>
+<title>Main</title>
+<description>Demonstration index for treeplate</description>
+<lastmod>$LastChangedDate$</lastmod>
+<keyword>test</keyword>
+<content>
+<h1>Demonstration</h1>
+<p>These files demonstrate how <a href="treeplate.html">treeplate</a> is
+used.</p>
+</content>
+</sitepage>

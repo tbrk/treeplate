@@ -1,0 +1,30 @@
+<!DOCTYPE sitetree SYSTEM "sitetree.dtd">
+<sitetree>
+
+<rooturl>http://www.yoursite.com</rooturl>
+
+<prefix>Treeplate - </prefix>
+<suffix> (test)</suffix>
+<author href="mailto:me@mysite.com">John Doe</author>
+<style>basic.css</style>
+
+<item homelink="yes" priority="1.0">
+
+    <name>Home</name>
+    <file>index</file>
+
+    <item directory="subdir">
+	<name>Test</name>
+	<file>test</file>
+    </item>
+</item>
+
+<item>
+    <name>Treeplate</name>
+    <file>treeplate</file>
+
+    <author href="mailto:tbourke@cse.unsw.edu.au">Timothy Bourke</author>
+    <keyword>xml</keyword>
+</item>
+
+</sitetree>

@@ -1,0 +1,10 @@
+<!DOCTYPE sitepage SYSTEM "sitepage.dtd">
+<sitepage>
+<title>Test</title>
+<description>Test file in a subdirectory.</description>
+<lastmod>$LastChangedDate$</lastmod>
+<keyword>subdirectory</keyword>
+<content>
+<h1>Test</h1>
+</content>
+</sitepage>
