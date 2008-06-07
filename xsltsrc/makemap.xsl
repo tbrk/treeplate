@@ -87,16 +87,22 @@
         <xsl:otherwise>0.5</xsl:otherwise>
       </xsl:choose>
     </priority>
-    <!-- <lastmod></lastmod> -->
+
   </xsl:template>
 
   <xsl:template match="sitepage" mode="getdate">
-    <xsl:if test="starts-with(lastmod, '$LastChangedDate: ')">
-      <lastmod>
-        <xsl:value-of
+    <xsl:choose>
+      <xsl:when test="starts-with(lastmod, '$LastChangedDate: ')">
+        <lastmod>
+          <xsl:value-of
 	    select="substring-before(substring-after(lastmod, '$LastChangedDate: '), ' ')"/>
-      </lastmod>
-    </xsl:if>
+        </lastmod>
+      </xsl:when>
+
+      <xsl:when test="lastmod">
+	<lastmod><xsl:value-of select="lastmod/text()"/></lastmod>
+      </xsl:when>
+    </xsl:choose>
   </xsl:template>
 
 </xsl:stylesheet>
