@@ -37,8 +37,9 @@
       <xsl:with-param name="match" select="'style'"/>
     </xsl:apply-templates>
 
-    <xsl:comment><![CDATA[[if lte IE 7]>
+    <xsl:comment><![CDATA[[if lt IE 7]>
     <style type='text/css'>
+	html { overflow: auto; }
 	body { overflow: hidden; font-size: 100%; }
 	div#container { overflow: auto; }
     </style>

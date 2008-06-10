@@ -44,8 +44,6 @@ div#menu ul             { list-style: none;
 @media screen { body>div#menu { position: fixed; } }
 @media print { div#menu { display: none; }}
 
-html                { overflow: auto; }
-
 body                { background: white;
                       color: black;
                       margin: 0px;
