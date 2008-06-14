@@ -1,5 +1,6 @@
 <!ELEMENT sitepage (title,
-		      ((description, lastmod, author?, header?, content)
+		      ((description, lastmod, author?, header?,
+		        content, license?)
 		      |redirect
 		      ))>
 <!ELEMENT title       (#PCDATA) >
@@ -21,11 +22,14 @@
 <!ENTITY % xhtml-struct.module "IGNORE" >
 %xhtml;
 
-<!-- Content contains a xhtml block elements -->
+<!-- Content contains xhtml block elements -->
 <!ELEMENT content     ( %Block.mix; | import )+ >
 <!ATTLIST content mainid CDATA "main" >
 <!ATTLIST content footer CDATA "yes" >
 
-<!-- Header contains a xhtml block elements -->
+<!-- Header contains xhtml block elements -->
 <!ELEMENT header      ( %HeadOpts.mix; )+ >
+
+<!-- License contains xhtml block elements -->
+<!ELEMENT license     ( %Block.mix; )+ >
 

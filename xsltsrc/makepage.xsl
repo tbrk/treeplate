@@ -88,6 +88,12 @@
                   <xsl:attribute name="class">main</xsl:attribute>
                   <xsl:apply-templates mode="copy" select="content/*"/>
                 </xsl:element>
+
+		<xsl:if test="license">
+		  <div id="license">
+		    <xsl:copy-of select="license"/>
+		  </div>
+		</xsl:if>
               </div>
 
               <xsl:if test="not(content/@footer = 'no')">
