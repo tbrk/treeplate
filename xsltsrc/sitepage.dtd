@@ -1,6 +1,6 @@
 <!ELEMENT sitepage (title,
-		      ((description, lastmod, author?, header?,
-		        content, license?)
+		      ((description, lastmod, keyword*,
+			author?, header?, content)
 		      |redirect
 		      ))>
 <!ELEMENT title       (#PCDATA) >
@@ -8,28 +8,33 @@
 <!ATTLIST title suffix CDATA "yes" >
 <!ELEMENT description (#PCDATA) >
 <!ELEMENT lastmod     (#PCDATA) >
+<!ELEMENT keyword     (#PCDATA) >
 <!ELEMENT author      (#PCDATA) >
 <!ATTLIST author href CDATA #REQUIRED >
 <!ELEMENT redirect    (EMPTY) >
 <!ATTLIST redirect href CDATA #REQUIRED >
 <!ELEMENT import      (EMPTY) >
 <!ATTLIST import href CDATA #REQUIRED >
+<!ATTLIST import xmlns CDATA #FIXED "">
 
 <!-- Include all of xhtml-1.1 except the Core Structure Module,
      which includes body, head, html and title tags. -->
+<!ENTITY % xhtml-struct.module "IGNORE" >
 <!ENTITY % xhtml PUBLIC "-//W3C//DTD XHTML 1.1//EN"
 			"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd" >
-<!ENTITY % xhtml-struct.module "IGNORE" >
+<!ENTITY % Block.extra "|import" >
+<!ENTITY % Inline.extra "|footnote" >
 %xhtml;
 
-<!-- Content contains xhtml block elements -->
-<!ELEMENT content     ( %Block.mix; | import )+ >
+<!-- content contains xhtml block elements -->
+<!ELEMENT content     ( %Block.mix; )+ >
 <!ATTLIST content mainid CDATA "main" >
 <!ATTLIST content footer CDATA "yes" >
 
-<!-- Header contains xhtml block elements -->
+<!-- header contains xhtml block elements -->
 <!ELEMENT header      ( %HeadOpts.mix; )+ >
 
-<!-- License contains xhtml block elements -->
-<!ELEMENT license     ( %Block.mix; )+ >
+<!-- footnote contains xhtml block elements -->
+<!ELEMENT footnote    (#PCDATA | %Inline.mix; )* >
+<!ATTLIST footnote xmlns CDATA #FIXED "">
 

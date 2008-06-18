@@ -18,11 +18,25 @@
        * set namespace in xslt
        * perform import
   -->
-  <xsl:template match="import" mode="copy">
+  <xsl:template match="import" mode="copy" priority="10">
     <xsl:apply-templates mode="copy" select="document(@href)/*"/>
   </xsl:template>
 
-  <xsl:template match="node()" mode="copy">
+  <xsl:template match="footnote" mode="copy" priority="10">
+    <xsl:variable name="number"
+		  select="count(preceding::footnote) + 1"/>
+    <xsl:element name="sup"
+		   namespace="http://www.w3.org/1999/xhtml">
+      <xsl:element name="a">
+        <xsl:attribute name="href">
+	    <xsl:value-of select="concat('#footnote_', $number)"/>
+	</xsl:attribute>
+        <xsl:value-of select="$number"/>
+      </xsl:element>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template match="node()" mode="copy" priority="1">
     <xsl:element name="{local-name()}" namespace="http://www.w3.org/1999/xhtml">
       <xsl:apply-templates mode="copy" select="@*|node()|text()|comment()"/>
     </xsl:element>
@@ -50,7 +64,7 @@
     </xsl:text>
   </xsl:template>
 
-  <xsl:template match="@*|text()|comment()" priority="3" mode="copy">
+  <xsl:template match="@*|text()|comment()" priority="1" mode="copy">
     <xsl:copy-of select="."/>
   </xsl:template>
 

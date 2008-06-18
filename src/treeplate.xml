@@ -25,7 +25,8 @@ boilerplate xhtml for</p>
 rows—<code>class="row0"</code>, <code>class="row1"</code>—so that they can 
 be coloured by a stylesheet if desired.
 There is an import feature for inserting generated content, like, for 
-example, this <a href="snespp.html">manual page</a>.
+example, this <a href="snespp.html">manual page</a>, and a feature for
+adding footnotes<footnote>Like this one!</footnote>.
 The boilerplate generation makes it easy to experiment with specialized 
 support for troublesome browser software without having to manually edit 
 all pages.
@@ -56,6 +57,24 @@ xpath 1.0, and the <a href="http://www.exslt.org/exsl/elements/document">exsl:do
 </p>
 
 <h2 id="operation">Operation</h2>
+
+<div class="figure" id="fig_1">
+  <img id="fig_1img" src="treeplate.png"
+   alt="treeplate, inputs: sitetree.xml, sitemaps.xml, outputs: sitemap.xml, sitepages.html"
+   title="Figure 1: Source and destination files" />
+  <div class="caption">
+      <span class="caption">Figure 1:</span> Source and destination files<footnote>
+	<a href="#fig_1">Figure 1</a> uses elements from <a
+		href="http://commons.wikimedia.org/wiki/Image:XSLT_en.svg">Image:XSLT
+		en.svg</a> by Dreftymac.
+	    It is released under a <a
+		href="http://en.wikipedia.org/wiki/Creative_Commons">Creative
+		Commons</a> <a
+		href="http://creativecommons.org/licenses/by/2.5/">Attribution
+		2.5</a> license.
+      </footnote>
+  </div>
+</div>
 
 <p>Treeplate requires these files and directories:</p>
 <table>
@@ -214,6 +233,11 @@ All other generated links are relative.</p>
     <td>The last modified date for insertion into the footer.
 	The &#36; signs, from subversion tags, are removed if present.</td>
 </tr>
+<tr><td><code>keyword</code></td>
+    <td>Associated keyword.
+	Multiple <code>keyword</code> elements may be given.
+	They are combined with the inherited keywords.</td>
+</tr>
 <tr><td><code>author</code></td>
     <td>Overrides the inherited <code>author</code> attribute.
     An <code>href</code> attribute must be given.</td>
@@ -238,6 +262,10 @@ All other generated links are relative.</p>
 	<li>The content may contain <code>import</code> tags with an 
 	<code>href</code> attribute, relative to the source file, to insert 
 	generated content.</li>
+
+	<li>The content may contain <code>footnote</code> tags containing
+	inline html elements.
+	Footnotes are replaced with a link to the full text.</li>
 	</ul></td>
 </tr>
 </table>

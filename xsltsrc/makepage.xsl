@@ -28,6 +28,7 @@
   <xsl:include href="redirect.xsl"/>
   <xsl:include href="copycontent.xsl"/>
   <xsl:include href="makehead.xsl"/>
+  <xsl:include href="makemisc.xsl"/>
 
   <xsl:template match="/sitepage">
     <xsl:param name="siteitem"/>
@@ -95,6 +96,13 @@
 		  </div>
 		</xsl:if>
               </div>
+
+	      <xsl:if test="count(content//footnote) > 0">
+		<ol class="footnotes">
+		  <xsl:apply-templates select="content//footnote"
+				       mode="makefootnote"/>
+	        </ol>
+	      </xsl:if>
 
               <xsl:if test="not(content/@footer = 'no')">
                 <div id="footer">
