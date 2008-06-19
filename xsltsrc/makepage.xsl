@@ -90,19 +90,16 @@
                   <xsl:apply-templates mode="copy" select="content/*"/>
                 </xsl:element>
 
-		<xsl:if test="license">
-		  <div id="license">
-		    <xsl:copy-of select="license"/>
+		<xsl:if test="count(content//footnote) > 0">
+		  <div class="footnotes">
+		    <ol>
+		      <xsl:apply-templates select="content//footnote"
+					   mode="makefootnote"/>
+		    </ol>
 		  </div>
 		</xsl:if>
-              </div>
 
-	      <xsl:if test="count(content//footnote) > 0">
-		<ol class="footnotes">
-		  <xsl:apply-templates select="content//footnote"
-				       mode="makefootnote"/>
-	        </ol>
-	      </xsl:if>
+              </div>
 
               <xsl:if test="not(content/@footer = 'no')">
                 <div id="footer">
