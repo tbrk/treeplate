@@ -42,18 +42,19 @@ copy-paste-modify for the common bits, then Treeplate could be for you!</p>
 
 <h2 id="download">Download</h2>
 
-<p>Treeplate is released under a <a href="bsdlicense.html">BSD license</a>.
+<p>Treeplate is released under a <a href="bsdlicense2008.html">BSD license</a>.
 It may be used and modified without restriction but no guarantees or support are offered.
 Nevertheless, patches, problem reports, and suggestions for improvement (in keeping
 with the minimalist philosophy) are <a
 href="mailto:tbourke@cse.unsw.edu.au">welcomed</a>.</p>
 
 <p>The current version is available for download: <a
-href="treeplate-1.0.0.tar.gz">Treeplate 1.0.0</a>.
+	href="treeplate-1.1.0.tar.gz">Treeplate 1.1.0</a> <b>(20080618)</b>.
 It is intended for unix systems and requires a Bourne shell and <a
 href="http://xmlsoft.org/XSLT/xsltproc2.html">xsltproc</a>.
 It should also work with other xslt processors and only requires xslt 1.0,
-xpath 1.0, and the <a href="http://www.exslt.org/exsl/elements/document">exsl:document</a> extension.
+xpath 1.0, and the
+<a href="http://www.exslt.org/exsl/elements/document">exsl:document</a> extension.
 </p>
 
 <h2 id="operation">Operation</h2>
@@ -159,13 +160,28 @@ The full list of item attributes is:</p>
 </tr>
 </table>
 
-<p>Each item must contain <code>name</code> and <code>file</code> elements
-giving the name to be used in titles and the menu, and naming the source,
-<code>file.xml</code>, and destination, <code>file.html</code>, files.
-An item may contain other items.
-Extra elements inside <code>item</code>, or <code>sitetree</code> itself,
-are inherited by that branch of the hierarchy.
-The possibilities are:</p>
+<p>Each item may contain other items, and must contain two elements:</p>
+
+<table>
+<tr><td><code>name</code></td>
+    <td>Text used in titles and menus.</td>
+</tr>
+<tr><td><code>file</code></td>
+    <td>Root name for the the source <code>.xml</code> and
+    destination <code>.html</code> files.
+    An optional <code>extension</code> attribute allows the destination file
+    extension to be changed.
+    An optional <code>url</code> attribute allows menu items to be directed
+    elsewhere; a destination page is still generated.
+    An optional <code>rellinkprefix</code> attribute is prefixed to relative
+    site links from the generated page, which is occasionally useful for
+    accounting for the <code>url</code> attribute's effects.</td>
+</tr>
+</table>
+
+<p>Several settings can be set by adding the elements below to an
+    <code>item</code>, or to the <code>sitetree</code> itself,
+   they are inherited by that branch of the hierarchy:</p>
 
 <table>
 <tr><td><code>prefix</code></td>
@@ -218,7 +234,7 @@ All other generated links are relative.</p>
 &lt;/sitepage&gt;
 </pre>
 
-<p>The list of all possible elements:</p>
+<p>The list of all possible <code>sitepage</code> elements:</p>
 
 <table>
 <tr><td><code>title</code></td>
@@ -242,9 +258,15 @@ All other generated links are relative.</p>
     <td>Overrides the inherited <code>author</code> attribute.
     An <code>href</code> attribute must be given.</td>
 </tr>
+<tr><td><code>prepage</code></td>
+    <td>Optional text for insertion before the opening <code>html</code>
+	element.</td>
+</tr>
 <tr><td><code>header</code></td>
     <td>Optional additional elements for insertion into the destination
-	<code>head</code>.</td>
+	<code>head</code>.
+	An optional <code>charset</code> attribute allows a charset other
+	than <code>UTF-8</code> to be specified.</td>
 </tr>
 <tr><td><code>content</code></td>
     <td>Xhtml content for insertion into the generated page.
@@ -267,6 +289,10 @@ All other generated links are relative.</p>
 	inline html elements.
 	Footnotes are replaced with a link to the full text.</li>
 	</ul></td>
+</tr>
+<tr><td><code>postpage</code></td>
+    <td>Optional text for insertion after the closing <code>html</code>
+	element.</td>
 </tr>
 </table>
 

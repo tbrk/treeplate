@@ -14,10 +14,41 @@
 # License for more details.
 #
 
-SRC=`realpath ${1:-./src}`
-DST=`realpath ${2:-./dst}`
-
 XSLT=./xsltsrc
+
+SRCARG=""
+DSTARG=""
+VALID="--novalid"
+HTMLDTD="/usr/local/share/xml/xhtml/1.1"
+
+while [ $# -gt 0 ]
+do
+    case "$1" in
+	-h)
+	    echo "usage: `basename $0` [--validate] <srcdir> <dstdir>" 2>&1
+	    ;;
+
+	--validate)
+	    VALID=""
+	    ;;
+	
+	-*) echo "`basename $0`: invalid option \"$1\"."
+	    ;;
+
+	*)  if [ -z $SRCARG ]; then
+		SRCARG=$1
+	    elif [ -z $DSTARG ]; then
+		DSTARG=$1
+	    else
+		echo "ignored argument: $1" >&2
+	    fi
+	    ;;
+    esac
+    shift
+done
+
+SRC=`realpath ${SRCARG:-./src}`
+DST=`realpath ${DSTARG:-./dst}`
 
 dodir () {
     for f in `find $1 -depth 1 -type f 2> /dev/null`
@@ -42,11 +73,10 @@ if [ -d "$SRC" -a -d "$DST" ]; then
      echo "<filehier name=\"dst\" path=\"$DST\">"
      dodir $DST
      echo "</filehier>"
-# With validation:
-#     echo "</hier>") | xsltproc --path $XSLT/ $XSLT/makesite.xsl -
-# No validation:
-     echo "</hier>") | xsltproc --novalid $XSLT/makesite.xsl -
+     echo "</hier>")  \
+	| xsltproc $VALID --nodtdattr \
+		--path "$XSLT $HTMLDTD" $XSLT/makesite.xsl -
 else
-    echo `basename $0`: ensure that \"$SRC\" and \"$DST\" exist.
+    echo "`basename $0`: ensure that \"$SRC\" and \"$DST\" exist."
 fi
 

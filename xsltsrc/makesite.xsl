@@ -76,19 +76,32 @@
     <xsl:param name="cdstpath"/>
     <xsl:param name="treemod"/>
 
-    <xsl:if test="not($cdstitem/file[@name=concat(current()/file/text(), '.html')]/@lastmod
+    <xsl:variable name="extension">
+      <xsl:choose>
+	<xsl:when test="not(current()/file/@extension)">
+	  <xsl:text>.html</xsl:text>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:value-of select="concat('.', current()/file/@extension)"/>
+	</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:if test="not($cdstitem/file[@name=concat(current()/file/text(),
+						  $extension)]/@lastmod
 		  &gt;
 		  $csrcitem/file[@name=concat(current()/file/text(), '.xml')]/@lastmod)
 		  or
-		  not ($cdstitem/file[@name=concat(current()/file/text(), '.html')]/@lastmod
+		  not ($cdstitem/file[@name=concat(current()/file/text(),
+						   $extension)]/@lastmod
 		  &gt; $treemod)">
 
       <xsl:message>
         <xsl:text>:::::</xsl:text>
-        <xsl:value-of select="concat($cdstpath, '/', file/text(), '.html')"/>
+        <xsl:value-of select="concat($cdstpath, '/', file/text(), $extension)"/>
       </xsl:message>
 
-      <exsl:document href="{concat($cdstpath, '/', file/text(), '.html')}"
+      <exsl:document href="{concat($cdstpath, '/', file/text(), $extension)}"
 		     method="xml"
 		     omit-xml-declaration="yes"
 		     standalone="yes"

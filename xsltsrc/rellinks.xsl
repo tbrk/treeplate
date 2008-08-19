@@ -16,8 +16,10 @@
 		xmlns="http://www.w3.org/1999/xhtml"
 		version="1.0">
 
+  <xsl:include href="makemisc.xsl"/>
+
   <xsl:template mode="backlink" match="item|sitetree">
-    <xsl:param name="relpath" select="''"/>
+    <xsl:param name="relpath" />
     <xsl:param name="match"/>
 
     <xsl:choose>
@@ -45,10 +47,11 @@
         <xsl:element name="link">
           <xsl:attribute name="rel">home</xsl:attribute>
           <xsl:attribute name="title">Home</xsl:attribute>
-          <xsl:attribute name="href">
-            <xsl:value-of
-	      select="concat($relpath, item[@homelink='yes']/file/text(), '.html')"/>
-          </xsl:attribute>
+
+	  <xsl:apply-templates mode="makehref"
+			       select="item[@homelink='yes']/file">
+	    <xsl:with-param name="path" select="$relpath"/>
+	  </xsl:apply-templates>
         </xsl:element>
       </xsl:when>
 
@@ -71,9 +74,11 @@
   </xsl:template>
 
   <xsl:template mode="makerel" match="item">
+    <xsl:variable name="relpath" select="file/@rellinkprefix"/>
 
     <xsl:apply-templates mode="backlink" select=".">
       <xsl:with-param name="match" select="'home'"/>
+      <xsl:with-param name="relpath" select="$relpath"/>
     </xsl:apply-templates>
 
     <xsl:apply-templates mode="makelink"
@@ -82,8 +87,12 @@
 
       <xsl:with-param name="goback">
         <xsl:choose>
-          <xsl:when test="@directory">../</xsl:when>
-          <xsl:otherwise/>
+	  <xsl:when test="@directory">
+	    <xsl:value-of select="concat($relpath, '../')"/>
+	  </xsl:when>
+          <xsl:otherwise>
+	    <xsl:value-of select="$relpath"/>
+	  </xsl:otherwise>
         </xsl:choose>
       </xsl:with-param>
     </xsl:apply-templates>
@@ -94,8 +103,12 @@
 
       <xsl:with-param name="goback">
         <xsl:choose>
-          <xsl:when test="@directory">../</xsl:when>
-          <xsl:otherwise/>
+	  <xsl:when test="@directory">
+	    <xsl:value-of select="concat($relpath, '../')"/>
+	  </xsl:when>
+          <xsl:otherwise>
+	    <xsl:value-of select="$relpath"/>
+	  </xsl:otherwise>
         </xsl:choose>
       </xsl:with-param>
     </xsl:apply-templates>
@@ -106,8 +119,12 @@
 
       <xsl:with-param name="goback">
         <xsl:choose>
-          <xsl:when test="@directory">../</xsl:when>
-          <xsl:otherwise/>
+	  <xsl:when test="@directory">
+	    <xsl:value-of select="concat($relpath, '../')"/>
+	  </xsl:when>
+          <xsl:otherwise>
+	    <xsl:value-of select="$relpath"/>
+	  </xsl:otherwise>
         </xsl:choose>
       </xsl:with-param>
     </xsl:apply-templates>
@@ -118,8 +135,12 @@
 
       <xsl:with-param name="goback">
         <xsl:choose>
-          <xsl:when test="@directory">../</xsl:when>
-          <xsl:otherwise/>
+	  <xsl:when test="@directory">
+	    <xsl:value-of select="concat($relpath, '../')"/>
+	  </xsl:when>
+          <xsl:otherwise>
+	    <xsl:value-of select="$relpath"/>
+	  </xsl:otherwise>
         </xsl:choose>
       </xsl:with-param>
     </xsl:apply-templates>
@@ -128,26 +149,50 @@
 			 select="./parent::item">
       <xsl:with-param name="goback">
         <xsl:choose>
-          <xsl:when test="@directory">../</xsl:when>
-          <xsl:otherwise/>
+	  <xsl:when test="@directory">
+	    <xsl:value-of select="concat($relpath, '../')"/>
+	  </xsl:when>
+          <xsl:otherwise>
+	    <xsl:value-of select="$relpath"/>
+	  </xsl:otherwise>
         </xsl:choose>
       </xsl:with-param>
     </xsl:apply-templates>
 
     <xsl:apply-templates mode="makelink"
-			 select="(./ancestor-or-self::*/author)[last()]"/>
+			 select="(./ancestor-or-self::*/author)[last()]">
+      <xsl:with-param name="goback" select="$relpath"/>
+    </xsl:apply-templates>
+
     <xsl:apply-templates mode="makelink"
-			 select="(./ancestor-or-self::*/link[@rel='contents'])[last()]"/>
+			 select="(./ancestor-or-self::*/link[@rel='contents'])[last()]">
+      <xsl:with-param name="goback" select="$relpath"/>
+    </xsl:apply-templates>
+
     <xsl:apply-templates mode="makelink"
-			 select="(./ancestor-or-self::*/link[@rel='copyright'])[last()]"/>
+			 select="(./ancestor-or-self::*/link[@rel='copyright'])[last()]">
+      <xsl:with-param name="goback" select="$relpath"/>
+    </xsl:apply-templates>
+
     <xsl:apply-templates mode="makelink"
-			 select="(./ancestor-or-self::*/link[@rel='glossary'])[last()]"/>
+			 select="(./ancestor-or-self::*/link[@rel='glossary'])[last()]">
+      <xsl:with-param name="goback" select="$relpath"/>
+    </xsl:apply-templates>
+
     <xsl:apply-templates mode="makelink"
-			 select="(./ancestor-or-self::*/link[@rel='help'])[last()]"/>
+			 select="(./ancestor-or-self::*/link[@rel='help'])[last()]">
+      <xsl:with-param name="goback" select="$relpath"/>
+    </xsl:apply-templates>
+
     <xsl:apply-templates mode="makelink"
-			 select="(./ancestor-or-self::*/link[@rel='search'])[last()]"/>
+			 select="(./ancestor-or-self::*/link[@rel='search'])[last()]">
+      <xsl:with-param name="goback" select="$relpath"/>
+    </xsl:apply-templates>
+
     <xsl:apply-templates mode="makelink"
-			 select="(./ancestor-or-self::*/link[@rel='index'])[last()]"/>
+			 select="(./ancestor-or-self::*/link[@rel='index'])[last()]">
+      <xsl:with-param name="goback" select="$relpath"/>
+    </xsl:apply-templates>
   </xsl:template>
 
   <!-- link rel tags -->
@@ -167,20 +212,20 @@
         <xsl:value-of select="name/text()"/>
       </xsl:attribute>
 
-      <xsl:attribute name="href">
-        <xsl:choose>
+      <xsl:choose>
+        <xsl:when test="@directory">
+	  <xsl:apply-templates mode="makehref" select="file">
+	    <xsl:with-param name="path"
+			    select="concat($goback, @directory, '/')"/>
+	  </xsl:apply-templates>
+        </xsl:when>
 
-          <xsl:when test="@directory">
-            <xsl:value-of select="concat($goback, @directory, '/', file, '.html')"/>
-          </xsl:when>
-
-          <xsl:otherwise>
-            <xsl:value-of select="concat($goback, file, '.html')"/>
-          </xsl:otherwise>
-
-        </xsl:choose>
-      </xsl:attribute>
-
+        <xsl:otherwise>
+	  <xsl:apply-templates mode="makehref" select="file">
+	    <xsl:with-param name="path" select="$goback"/>
+	  </xsl:apply-templates>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:element>
 
   </xsl:template>
@@ -225,9 +270,9 @@
         <xsl:value-of select="name/text()"/>
       </xsl:attribute>
 
-      <xsl:attribute name="href">
-        <xsl:value-of select="concat($goback, file, '.html')"/>
-      </xsl:attribute>
+      <xsl:apply-templates mode="makehref" select="file">
+        <xsl:with-param name="path" select="$goback"/>
+      </xsl:apply-templates>
     </xsl:element>
 
   </xsl:template>

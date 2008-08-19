@@ -24,7 +24,6 @@
 
   <xsl:include href="makemenu.xsl"/>
   <xsl:include href="makepath.xsl"/>
-  <xsl:include href="rellinks.xsl"/>
   <xsl:include href="redirect.xsl"/>
   <xsl:include href="copycontent.xsl"/>
   <xsl:include href="makehead.xsl"/>
@@ -59,15 +58,19 @@
     </xsl:variable>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+    <xsl:if test="prepage">
+      <xsl:apply-templates mode="copy" select="prepage/text()"/>
+    </xsl:if>
+
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
       <xsl:choose>
         <!-- ** content -->
         <xsl:when test="content">
-          <head>
-            <xsl:apply-templates mode="makehead" select=".">
-              <xsl:with-param name="siteitem" select="$siteitem"/>
-            </xsl:apply-templates>
-          </head>
+	  <head>
+	    <xsl:apply-templates mode="makehead" select=".">
+	      <xsl:with-param name="siteitem" select="$siteitem"/>
+	    </xsl:apply-templates>
+	  </head>
           <body>
             <div id="container">
               <div id="content">
@@ -87,7 +90,8 @@
                   </xsl:choose>
 
                   <xsl:attribute name="class">main</xsl:attribute>
-                  <xsl:apply-templates mode="copy" select="content/*"/>
+		  <xsl:apply-templates mode="copy"
+		      select="content/* | content/text() | content/comment()"/>
                 </xsl:element>
 
 		<xsl:if test="count(content//footnote) > 0">
@@ -134,6 +138,8 @@
             <xsl:apply-templates mode="makemenu" select="$sitetree">
               <xsl:with-param name="page" select="$itempath"/>
               <xsl:with-param name="dirs" select="$dirs"/>
+	      <xsl:with-param name="linkroot"
+		  select="$siteitem/file/@rellinkprefix"/>
             </xsl:apply-templates>
           </body>
         </xsl:when>
@@ -147,6 +153,10 @@
 
       </xsl:choose>
     </html>
+
+    <xsl:if test="postpage">
+      <xsl:apply-templates mode="copy" select="postpage/text()"/>
+    </xsl:if>
   </xsl:template>
 
   <!-- Put the author details in the footer -->

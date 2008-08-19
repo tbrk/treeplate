@@ -25,10 +25,12 @@
 
       <xsl:apply-templates mode="backlink" select="$siteitem">
         <xsl:with-param name="match" select="'style'"/>
+        <xsl:with-param name="rellink" select="$siteitem/file/@rellinkprefix"/>
       </xsl:apply-templates>
 
       <xsl:apply-templates mode="backlink" select="$siteitem">
         <xsl:with-param name="match" select="'icon'"/>
+        <xsl:with-param name="rellink" select="$siteitem/file/@rellinkprefix"/>
       </xsl:apply-templates>
 
       <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>

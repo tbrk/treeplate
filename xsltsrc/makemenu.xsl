@@ -27,6 +27,7 @@
   <xsl:template mode="makemenu" match="sitetree">
     <xsl:param name="page"/>
     <xsl:param name="dirs"/>
+    <xsl:param name="linkroot"/>
 
     <div xmlns="http://www.w3.org/1999/xhtml" id="menu">
       <div id="innermenu">
@@ -37,6 +38,7 @@
             <xsl:with-param name="rpath">
               <xsl:apply-templates select="$dirs"/>
             </xsl:with-param>
+            <xsl:with-param name="linkroot" select="$linkroot"/>
           </xsl:apply-templates>
         </ul>
       </div>
@@ -46,6 +48,18 @@
   <xsl:template match="item" mode="menuitem">
     <xsl:param name="path"/>
     <xsl:param name="rpath"/>
+    <xsl:param name="linkroot"/>
+
+    <xsl:variable name="nrpath">
+      <xsl:choose>
+	<xsl:when test="@directory">
+	  <xsl:value-of select="substring-after($rpath,'/')"/>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:value-of select="$rpath"/>
+	</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
 
     <xsl:choose>
       <!-- no name, pass through -->
@@ -53,6 +67,7 @@
         <xsl:apply-templates select="./item" mode="menuitem">
           <xsl:with-param name="path" select="$path"/>
           <xsl:with-param name="rpath" select="$rpath"/>
+	  <xsl:with-param name="linkroot" select="$linkroot"/>
         </xsl:apply-templates>
       </xsl:when>
 
@@ -60,7 +75,20 @@
       <xsl:when test="name=$path">
         <li>
           <span class="active">
-            <xsl:value-of select="name"/>
+            <xsl:choose>
+              <xsl:when test="file">
+                <xsl:element name="a">
+		  <xsl:apply-templates mode="makehref" select="file">
+		    <xsl:with-param name="path"
+				    select="concat($linkroot, $nrpath)"/>
+		  </xsl:apply-templates>
+                  <xsl:value-of select="name"/>
+                </xsl:element>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="name"/>
+              </xsl:otherwise>
+            </xsl:choose>
           </span>
           <xsl:if test="count(./item[not(@inmenu = 'no')])&gt;0">
             <ul>
@@ -70,6 +98,7 @@
                 <xsl:with-param name="rpath">
                   <xsl:value-of select="''"/>
                 </xsl:with-param>
+		<xsl:with-param name="linkroot" select="$linkroot"/>
               </xsl:apply-templates>
             </ul>
           </xsl:if>
@@ -78,23 +107,14 @@
 
       <!-- item on path -->
       <xsl:when test="name=substring-before($path,'/')">
-        <xsl:variable name="nrpath">
-          <xsl:choose>
-            <xsl:when test="@directory">
-              <xsl:value-of select="substring-after($rpath,'/')"/>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="$rpath"/>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:variable>
         <li>
           <xsl:choose>
             <xsl:when test="file">
               <xsl:element name="a">
-                <xsl:attribute name="href">
-                  <xsl:value-of select="concat($nrpath, file, '.html')"/>
-                </xsl:attribute>
+		<xsl:apply-templates mode="makehref" select="file">
+		  <xsl:with-param name="path"
+				  select="concat($linkroot, $nrpath)"/>
+		</xsl:apply-templates>
                 <xsl:value-of select="name"/>
               </xsl:element>
             </xsl:when>
@@ -107,6 +127,7 @@
 				 mode="menuitem">
               <xsl:with-param name="path" select="substring-after($path,'/')"/>
               <xsl:with-param name="rpath" select="$nrpath"/>
+              <xsl:with-param name="linkroot" select="$linkroot"/>
             </xsl:apply-templates>
           </ul>
         </li>
@@ -118,17 +139,21 @@
           <xsl:choose>
             <xsl:when test="file">
               <xsl:element name="a">
-                <xsl:attribute name="href">
-                  <xsl:choose>
-                    <xsl:when test="@directory">
-                      <xsl:value-of
-			select="concat($rpath, @directory, '/', file, '.html')"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <xsl:value-of select="concat($rpath, file, '.html')"/>
-                    </xsl:otherwise>
-                  </xsl:choose>
-                </xsl:attribute>
+                <xsl:choose>
+                  <xsl:when test="@directory">
+		    <xsl:apply-templates mode="makehref" select="file">
+		      <xsl:with-param name="path"
+				      select="concat($linkroot, $rpath,
+						     @directory, '/')"/>
+		    </xsl:apply-templates>
+		  </xsl:when>
+		  <xsl:otherwise>
+		    <xsl:apply-templates mode="makehref" select="file">
+		      <xsl:with-param name="path"
+				      select="concat($linkroot, $rpath)"/>
+		    </xsl:apply-templates>
+		  </xsl:otherwise>
+	        </xsl:choose>
                 <xsl:value-of select="name"/>
               </xsl:element>
             </xsl:when>

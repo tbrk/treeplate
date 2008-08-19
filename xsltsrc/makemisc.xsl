@@ -25,4 +25,30 @@
     </xsl:element>
   </xsl:template>
 
+  <xsl:template mode="makehref" match="file">
+    <xsl:param name="path"/>
+
+    <xsl:variable name="extension">
+      <xsl:choose>
+	<xsl:when test="not(@extension)">
+	  <xsl:text>.html</xsl:text>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:value-of select="concat('.', @extension)"/>
+	</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:attribute name="href">
+	<xsl:choose>
+	<xsl:when test="@url">
+	  <xsl:value-of select="@url"/>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:value-of select="concat($path, current(), $extension)"/>
+	</xsl:otherwise>
+	</xsl:choose>
+    </xsl:attribute>
+  </xsl:template>
+
 </xsl:stylesheet>

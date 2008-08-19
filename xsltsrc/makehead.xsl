@@ -35,6 +35,7 @@
 
     <xsl:apply-templates mode="backlink" select="$siteitem">
       <xsl:with-param name="match" select="'style'"/>
+      <xsl:with-param name="relpath" select="$siteitem/file/@rellinkprefix"/>
     </xsl:apply-templates>
 
     <xsl:comment><![CDATA[[if lt IE 7]>
@@ -48,6 +49,7 @@
 
     <xsl:apply-templates mode="backlink" select="$siteitem">
       <xsl:with-param name="match" select="'icon'"/>
+      <xsl:with-param name="relpath" select="$siteitem/file/@rellinkprefix"/>
     </xsl:apply-templates>
 
     <xsl:element name="meta">
@@ -58,6 +60,7 @@
     </xsl:element>
 
     <xsl:apply-templates mode="makerel" select="$siteitem"/>
+
     <xsl:if test="count($siteitem/ancestor-or-self::*/keyword[not(@inherit='no')] | ./keyword)&gt;0">
       <xsl:element name="meta">
         <xsl:attribute name="name">keywords</xsl:attribute>
@@ -68,8 +71,20 @@
       </xsl:element>
     </xsl:if>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <xsl:apply-templates mode="copy" select="header/*"/>
+    <xsl:variable name="charset">
+      <xsl:choose>
+	<xsl:when test="not(header/@charset)">
+	  <xsl:text>UTF-8</xsl:text>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:value-of select="header/@charset"/>
+	</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=$charset"/>
+    <xsl:apply-templates mode="copy"
+			 select="header/*|header/text()|header/comment()"/>
   </xsl:template>
 
 </xsl:stylesheet>
