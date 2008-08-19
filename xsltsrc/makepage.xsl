@@ -106,7 +106,7 @@
               </div>
 
               <xsl:if test="not(content/@footer = 'no')">
-                <div id="footer">
+                <div id="footer"><div class="footercontent">
                   <xsl:choose>
                     <xsl:when test="/sitepage/author">
                       <xsl:apply-templates select="/sitepage/author"/>
@@ -131,7 +131,7 @@
 
                     </xsl:choose>
                   </span>
-                </div>
+	        </div></div>
               </xsl:if>
             </div>
 

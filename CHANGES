@@ -1,3 +1,7 @@
+20080819    treeplate-1.2.1
+  * Add an extra div (.footercontent) to the footer to make it easier to
+    adjust the appearance.
+
 20080819    treeplate-1.2.0
   * Add prepage and postpage feature to sitepages. 
   * Fix content copying  (include text() and comment()).

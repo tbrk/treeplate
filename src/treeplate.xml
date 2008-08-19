@@ -49,7 +49,7 @@ with the minimalist philosophy) are <a
 href="mailto:tbourke@cse.unsw.edu.au">welcomed</a>.</p>
 
 <p>The current version is available for download: <a
-	href="treeplate-1.1.0.tar.gz">Treeplate 1.1.0</a> <b>(20080618)</b>.
+	href="treeplate-1.2.0.tar.gz">Treeplate 1.2.0</a> <b>(20080819)</b>.
 It is intended for unix systems and requires a Bourne shell and <a
 href="http://xmlsoft.org/XSLT/xsltproc2.html">xsltproc</a>.
 It should also work with other xslt processors and only requires xslt 1.0,
