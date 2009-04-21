@@ -1,3 +1,6 @@
+20090422    treeplate-1.2.2
+  * Fix a bug in the output of charset meta values.
+
 20080819    treeplate-1.2.1
   * Add an extra div (.footercontent) to the footer to make it easier to
     adjust the appearance.
