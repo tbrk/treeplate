@@ -44,7 +44,8 @@
 	body { overflow: hidden; font-size: 100%; }
 	div#container { overflow: auto; }
     </style>
-    <script type="text/javascript">onload = function() { container.focus() }</script>
+    <script type="text/javascript">onload = function() {
+	try {container.focus() } catch {} }</script>
   <![endif]]]></xsl:comment>
 
     <xsl:apply-templates mode="backlink" select="$siteitem">
@@ -82,7 +83,14 @@
       </xsl:choose>
     </xsl:variable>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=$charset"/>
+    
+    <xsl:element name="meta">
+      <xsl:attribute name="http-equiv">Content-Type</xsl:attribute>
+      <xsl:attribute name="content">
+	  <xsl:text>text/html; charset=</xsl:text>
+	  <xsl:value-of select="$charset"/>
+      </xsl:attribute>
+    </xsl:element>
     <xsl:apply-templates mode="copy"
 			 select="header/*|header/text()|header/comment()"/>
   </xsl:template>

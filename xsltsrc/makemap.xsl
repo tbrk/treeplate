@@ -53,14 +53,16 @@
     <xsl:param name="path"/>
     <xsl:param name="srcpath"/>
 
-    <url>
-      <loc>
-        <xsl:value-of select="concat($path, @directory, '/', file, '.html')"/>
-      </loc>
-      <xsl:apply-templates mode="urldetail" select="."/>
-      <xsl:apply-templates mode="getdate"
-	select="document(concat($srcpath, @directory, '/', file, '.xml'))"/>
-    </url>
+    <xsl:if test="not(@sitemap = 'no')">
+      <url>
+	<loc>
+	  <xsl:value-of select="concat($path, @directory, '/', file, '.html')"/>
+	</loc>
+	<xsl:apply-templates mode="urldetail" select="."/>
+	<xsl:apply-templates mode="getdate"
+	  select="document(concat($srcpath, @directory, '/', file, '.xml'))"/>
+      </url>
+    </xsl:if>
 
     <xsl:apply-templates select="item" mode="sitemap">
       <xsl:with-param name="path" select="concat($path, @directory, '/')"/>
