@@ -51,10 +51,9 @@ SRC=`realpath ${SRCARG:-./src}`
 DST=`realpath ${DSTARG:-./dst}`
 
 dodir () {
-    for f in `find $1 -depth 1 -type f 2> /dev/null`
+    for f in `find $1 -maxdepth 1 -type f 2> /dev/null`
     do
-	echo "<file name=\"$(basename $f)\" \
-		    lastmod=\"$(stat -t %Y%m%d%H%M%S -f %Sm $f)\"/>"
+	echo "<file name=\"$(basename $f)\" lastmod=\"$(stat -c %Y $f)\"/>"
     done
 
     for dir in `find $1/* -type d -maxdepth 0 2> /dev/null`
