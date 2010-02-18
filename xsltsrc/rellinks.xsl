@@ -30,7 +30,7 @@
             <xsl:attribute name="rel">stylesheet</xsl:attribute>
 	    <xsl:if test="@media">
 	      <xsl:attribute name="media">
-		<xsl:value-of select="concat($relpath, @media)"/>
+		<xsl:value-of select="@media"/>
 	      </xsl:attribute>
 	    </xsl:if>
             <xsl:attribute name="href">
