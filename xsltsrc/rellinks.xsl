@@ -25,13 +25,20 @@
     <xsl:choose>
 
       <xsl:when test="$match = 'style' and ./style">
-        <xsl:element name="link">
-          <xsl:attribute name="rel">stylesheet</xsl:attribute>
-          <xsl:attribute name="href">
-            <xsl:value-of select="concat($relpath, style/text())"/>
-          </xsl:attribute>
-          <xsl:attribute name="type">text/css</xsl:attribute>
-        </xsl:element>
+	<xsl:for-each select="style">
+          <xsl:element name="link">
+            <xsl:attribute name="rel">stylesheet</xsl:attribute>
+	    <xsl:if test="@media">
+	      <xsl:attribute name="media">
+		<xsl:value-of select="concat($relpath, @media)"/>
+	      </xsl:attribute>
+	    </xsl:if>
+            <xsl:attribute name="href">
+              <xsl:value-of select="concat($relpath, text())"/>
+            </xsl:attribute>
+            <xsl:attribute name="type">text/css</xsl:attribute>
+          </xsl:element>
+	</xsl:for-each>
       </xsl:when>
 
       <xsl:when test="$match = 'icon' and icon">

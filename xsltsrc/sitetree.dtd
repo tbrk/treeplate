@@ -15,6 +15,7 @@
 <!ELEMENT author             (#PCDATA)>
 <!ATTLIST author href        CDATA #REQUIRED>
 <!ELEMENT style              (#PCDATA)>
+<!ATTLIST author media        CDATA #IMPLIED>
 <!ELEMENT icon               (#PCDATA)>
 <!ELEMENT name               (#PCDATA)>
 <!ELEMENT file               (#PCDATA)>
