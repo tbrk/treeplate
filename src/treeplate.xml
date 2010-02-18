@@ -194,7 +194,9 @@ The full list of item attributes is:</p>
     <td>Author name, with <code>href</code> attribute.</td>
 </tr>
 <tr><td><code>style</code></td>
-    <td>Filename of a css stylesheet.</td>
+    <td>Filename of a css stylesheet. Multiple stylesheets may be given.
+	An optional <code>media</code> attribute is copied through to the
+	generated html.</td>
 </tr>
 <tr><td><code>icon</code></td>
     <td>Filename of a page icon.</td>
