@@ -82,7 +82,6 @@
 	</xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-
     
     <xsl:element name="meta">
       <xsl:attribute name="http-equiv">Content-Type</xsl:attribute>
@@ -91,6 +90,10 @@
 	  <xsl:value-of select="$charset"/>
       </xsl:attribute>
     </xsl:element>
+
+    <xsl:apply-templates mode="copy"
+			 select="$siteitem/ancestor-or-self::*/header/*"/>
+
     <xsl:apply-templates mode="copy"
 			 select="header/*|header/text()|header/comment()"/>
   </xsl:template>
