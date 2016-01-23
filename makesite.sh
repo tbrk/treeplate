@@ -21,6 +21,15 @@ DSTARG=""
 VALID="--novalid"
 HTMLDTD="/usr/local/share/xml/xhtml/1.1"
 
+case `uname -s` in
+    Darwin*)
+	STAT="stat -f %m"
+	;;
+    Linux*)
+	STAT="stat -c %Y"
+	;;
+esac
+
 while [ $# -gt 0 ]
 do
     case "$1" in
@@ -47,13 +56,13 @@ do
     shift
 done
 
-SRC=`realpath ${SRCARG:-./src}`
-DST=`realpath ${DSTARG:-./dst}`
+SRC=${SRCARG:-${PWD}/src} # must be full paths (e.g., realpath)
+DST=${DSTARG:-${PWD}/dst}
 
 dodir () {
     for f in `find $1 -maxdepth 1 -type f 2> /dev/null`
     do
-	echo "<file name=\"$(basename $f)\" lastmod=\"$(stat -c %Y $f)\"/>"
+	echo "<file name=\"$(basename $f)\" lastmod=\"$($STAT $f)\"/>"
     done
 
     for dir in `find $1/* -type d -maxdepth 0 2> /dev/null`

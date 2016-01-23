@@ -161,7 +161,7 @@
 
   <!-- Put the author details in the footer -->
   <xsl:template match="author">
-    <span id="author">Author:
+    <span id="author">Written by:
 	<xsl:element name="a">
 	    <xsl:attribute name="href">
 		<xsl:value-of select="@href"/>
