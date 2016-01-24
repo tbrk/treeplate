@@ -71,7 +71,7 @@
 	    </xsl:apply-templates>
 	  </head>
           <body>
-            <div id="all">
+            <div id="all"><div id="all-inner">
               <div id="container">
                 <div id="content">
                   <xsl:element name="div">
@@ -146,7 +146,7 @@
                 <xsl:with-param name="match" select="'script'"/>
                 <xsl:with-param name="relpath" select="$siteitem/file/@rellinkprefix"/>
               </xsl:apply-templates>
-            </div>
+            </div></div>
           </body>
         </xsl:when>
 
