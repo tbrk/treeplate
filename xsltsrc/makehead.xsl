@@ -17,6 +17,14 @@
 
   <xsl:template mode="makehead" match="sitepage">
     <xsl:param name="siteitem"/>
+    <xsl:apply-templates mode="copy"
+			 select="$siteitem/ancestor-or-self::*/header/*"/>
+
+    <xsl:apply-templates mode="backlink" select="$siteitem">
+      <xsl:with-param name="match" select="'style'"/>
+      <xsl:with-param name="relpath" select="$siteitem/file/@rellinkprefix"/>
+    </xsl:apply-templates>
+
     <title>
       <xsl:if test="not(title/@prefix = 'no')">
         <xsl:for-each select="($siteitem/ancestor-or-self::*/prefix)[last()]">
@@ -30,11 +38,6 @@
         </xsl:for-each>
       </xsl:if>
     </title>
-
-    <xsl:apply-templates mode="backlink" select="$siteitem">
-      <xsl:with-param name="match" select="'style'"/>
-      <xsl:with-param name="relpath" select="$siteitem/file/@rellinkprefix"/>
-    </xsl:apply-templates>
 
     <xsl:comment><![CDATA[[if lt IE 7]>
     <style type='text/css'>
@@ -88,9 +91,6 @@
 	  <xsl:value-of select="$charset"/>
       </xsl:attribute>
     </xsl:element>
-
-    <xsl:apply-templates mode="copy"
-			 select="$siteitem/ancestor-or-self::*/header/*"/>
 
     <xsl:apply-templates mode="copy"
 			 select="header/*|header/text()|header/comment()"/>
