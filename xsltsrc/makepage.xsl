@@ -71,80 +71,82 @@
 	    </xsl:apply-templates>
 	  </head>
           <body>
-            <div id="container">
-              <div id="content">
-                <xsl:element name="div">
-                  <xsl:choose>
-
-                    <xsl:when test="content/@mainid">
-                      <xsl:attribute name="id">
-                        <xsl:value-of select="content/@mainid"/>
-                      </xsl:attribute>
-                    </xsl:when>
-
-                    <xsl:otherwise>
-                      <xsl:attribute name="id">main</xsl:attribute>
-                    </xsl:otherwise>
-
-                  </xsl:choose>
-
-                  <xsl:attribute name="class">main</xsl:attribute>
-		  <xsl:apply-templates mode="copy"
-		      select="content/* | content/text() | content/comment()"/>
-                </xsl:element>
-
-		<xsl:if test="count(content//footnote) > 0">
-		  <div class="footnotes">
-		    <ol>
-		      <xsl:apply-templates select="content//footnote"
-					   mode="makefootnote"/>
-		    </ol>
-		  </div>
-		</xsl:if>
-
-              </div>
-
-              <xsl:if test="not(content/@footer = 'no')">
-                <div id="footer"><div class="footercontent">
-                  <xsl:choose>
-                    <xsl:when test="/sitepage/author">
-                      <xsl:apply-templates select="/sitepage/author"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <xsl:apply-templates
-			select="($siteitem/ancestor-or-self::*/author)[last()]"/>
-                    </xsl:otherwise>
-                  </xsl:choose>
-
-                  <span id="date">
+            <div id="all">
+              <div id="container">
+                <div id="content">
+                  <xsl:element name="div">
                     <xsl:choose>
 
-                      <xsl:when test="starts-with(lastmod, '$')">
-                        <xsl:value-of
-			  select="substring-before(substring-after(lastmod, '$'), '$')"/>
+                      <xsl:when test="content/@mainid">
+                        <xsl:attribute name="id">
+                          <xsl:value-of select="content/@mainid"/>
+                        </xsl:attribute>
                       </xsl:when>
 
                       <xsl:otherwise>
-                        <xsl:value-of select="lastmod"/>
+                        <xsl:attribute name="id">main</xsl:attribute>
                       </xsl:otherwise>
 
                     </xsl:choose>
-                  </span>
-	        </div></div>
-              </xsl:if>
+
+                    <xsl:attribute name="class">main</xsl:attribute>
+                    <xsl:apply-templates mode="copy"
+                        select="content/* | content/text() | content/comment()"/>
+                  </xsl:element>
+
+                  <xsl:if test="count(content//footnote) > 0">
+                    <div class="footnotes">
+                      <ol>
+                        <xsl:apply-templates select="content//footnote"
+                                             mode="makefootnote"/>
+                      </ol>
+                    </div>
+                  </xsl:if>
+
+                </div>
+
+                <xsl:if test="not(content/@footer = 'no')">
+                  <div id="footer"><div class="footercontent">
+                    <xsl:choose>
+                      <xsl:when test="/sitepage/author">
+                        <xsl:apply-templates select="/sitepage/author"/>
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:apply-templates
+                          select="($siteitem/ancestor-or-self::*/author)[last()]"/>
+                      </xsl:otherwise>
+                    </xsl:choose>
+
+                    <span id="date">
+                      <xsl:choose>
+
+                        <xsl:when test="starts-with(lastmod, '$')">
+                          <xsl:value-of
+                            select="substring-before(substring-after(lastmod, '$'), '$')"/>
+                        </xsl:when>
+
+                        <xsl:otherwise>
+                          <xsl:value-of select="lastmod"/>
+                        </xsl:otherwise>
+
+                      </xsl:choose>
+                    </span>
+                  </div></div>
+                </xsl:if>
+              </div>
+
+              <xsl:apply-templates mode="makemenu" select="$sitetree">
+                <xsl:with-param name="page" select="$itempath"/>
+                <xsl:with-param name="dirs" select="$dirs"/>
+                <xsl:with-param name="linkroot"
+                    select="$siteitem/file/@rellinkprefix"/>
+              </xsl:apply-templates>
+
+              <xsl:apply-templates mode="backlink" select="$siteitem">
+                <xsl:with-param name="match" select="'script'"/>
+                <xsl:with-param name="relpath" select="$siteitem/file/@rellinkprefix"/>
+              </xsl:apply-templates>
             </div>
-
-            <xsl:apply-templates mode="makemenu" select="$sitetree">
-              <xsl:with-param name="page" select="$itempath"/>
-              <xsl:with-param name="dirs" select="$dirs"/>
-	      <xsl:with-param name="linkroot"
-		  select="$siteitem/file/@rellinkprefix"/>
-            </xsl:apply-templates>
-
-            <xsl:apply-templates mode="backlink" select="$siteitem">
-              <xsl:with-param name="match" select="'script'"/>
-              <xsl:with-param name="relpath" select="$siteitem/file/@rellinkprefix"/>
-            </xsl:apply-templates>
           </body>
         </xsl:when>
 
