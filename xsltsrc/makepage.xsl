@@ -26,6 +26,7 @@
   <xsl:include href="copycontent.xsl"/>
   <xsl:include href="makehead.xsl"/>
   <xsl:include href="makemisc.xsl"/>
+  <xsl:include href="rellinks.xsl"/>
 
   <xsl:template match="/sitepage">
     <xsl:param name="siteitem"/>
@@ -138,6 +139,11 @@
               <xsl:with-param name="dirs" select="$dirs"/>
 	      <xsl:with-param name="linkroot"
 		  select="$siteitem/file/@rellinkprefix"/>
+            </xsl:apply-templates>
+
+            <xsl:apply-templates mode="backlink" select="$siteitem">
+              <xsl:with-param name="match" select="'script'"/>
+              <xsl:with-param name="relpath" select="$siteitem/file/@rellinkprefix"/>
             </xsl:apply-templates>
           </body>
         </xsl:when>

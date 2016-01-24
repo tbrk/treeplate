@@ -39,6 +39,16 @@
 	</xsl:for-each>
       </xsl:when>
 
+      <xsl:when test="$match = 'script' and ./script">
+	<xsl:for-each select="script">
+          <xsl:element name="script">
+            <xsl:attribute name="src">
+              <xsl:value-of select="concat($relpath, text())"/>
+            </xsl:attribute>
+          </xsl:element>
+	</xsl:for-each>
+      </xsl:when>
+
       <xsl:when test="$match = 'icon' and icon">
         <xsl:element name="link">
           <xsl:attribute name="rel">shortcut icon</xsl:attribute>
