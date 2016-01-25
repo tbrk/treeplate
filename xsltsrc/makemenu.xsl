@@ -27,8 +27,8 @@
     <xsl:param name="dirs"/>
     <xsl:param name="linkroot"/>
 
-    <div xmlns="http://www.w3.org/1999/xhtml" id="menu">
-      <div id="innermenu">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="tp-menu">
+      <div class="tp-innermenu">
         <h2>Site menu</h2>
         <ul>
           <xsl:apply-templates select="item[not(@inmenu = 'no')]" mode="menuitem">

@@ -1,146 +1,196 @@
 /* $Id$ */
 
-#all,
-#all-inner,
-#container {
-    height: 100%;
+.tp-all,
+.tp-all-inner,
+.tp-content-container {
+  height: 100%;
 }
 
-div#menu                { overflow: auto;
-                          height: 100%;
-                          position: fixed;
+div.tp-menu {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
 
-                          top: 0;
-                          left: 0;
+  top: 0;
+  left: 0;
 
-                          width: 9em;
-                          margin: 0px;
-                          padding: 0px;
-                          background-color: crimson;
+  width: 9em;
+  margin: 0px;
+  padding: 0px;
+  background-color: crimson;
 
-                          border: none;
-                          font-family: sans-serif;
-                          text-align: left;
-                        }
+  border: none;
+  font-family: sans-serif;
+  text-align: left;
+}
 
-div#innermenu           { padding: 0em;
-                          padding-top: 1em;
-                          margin: 0px;
-                          font-size: smaller;
-                          cursor: default;
-                          color: white;
-                        }
+div.tp-innermenu {
+  padding: 0em;
+  padding-top: 1em;
+  margin: 0px;
+  font-size: smaller;
+  cursor: default;
+  color: white;
+}
 
-div#innermenu h2        { display: none; }
+div.tp-innermenu h2 {
+  display: none;
+}
 
-div#menu span.nolink    { font-style: italic; }
-div#menu span.active    { font-weight: bold; }
+div.tp-menu span.nolink {
+  font-style: italic;
+}
+div.tp-menu span.active {
+  font-weight: bold;
+}
 
-div#menu a:link         { color: white; text-decoration: none; }
-div#menu a:visited      { color: white; text-decoration: none; }
-div#menu a:active       { color: white; text-decoration: none; }
-div#menu a:hover        { color: yellow; text-decoration: none; }
+div.tp-menu a:link {
+  color: white;
+  text-decoration: none; }
+div.tp-menu a:visited {
+  color: white;
+  text-decoration: none; }
+div.tp-menu a:active {
+  color: white;
+  text-decoration: none; }
+div.tp-menu a:hover {
+  color: yellow;
+  text-decoration: none; }
 
-div#menu ul             { list-style: none;
-                          margin: 0em;
-                          padding: 0em;
-                          padding-left: 1em;
-                        }
+div.tp-menu ul {
+  list-style: none;
+  margin: 0em;
+  padding: 0em;
+  padding-left: 1em;
+}
 
-@media screen { body>div#menu { position: fixed; } }
-@media print { div#menu { display: none; }}
+@media screen {
+  body>div.tp-menu {
+    position: fixed;
+  }
+}
+@media print {
+  div.tp-menu {
+    display: none;
+  }
+}
 
-body                { background: white;
-                      color: black;
-                      margin: 0px;
-                      font-family: serif;
+body {
+  background: white;
+  color: black;
+  margin: 0px;
+  font-family: serif;
 
-                      height: 100%;
-                    }
+  height: 100%;
+}
 
-@media screen { body { padding-left: 9em; }}
-@media print  { body { padding-left: 0em; }}
+@media screen {
+  body {
+    padding-left: 9em;
+  }
+}
+@media print {
+  body {
+    padding-left: 0em;
+  }
+}
 
-div#container       { position: relative;
-                      width: 100%;
-                      height: 100%;
-                      padding: 0px;
-                      text-align: center;
-                    }
+div.tp-content-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    text-align: center;
+}
 
-div#content         { margin: 0 auto;
-                      width: 44em;
-                      padding-left: 2em;
-                      text-align: left;
-                      min-height: 40em;
+div.tp-content {
+    margin: 0 auto;
+    width: 44em;
+    padding-left: 2em;
+    text-align: left;
+    min-height: 40em;
 
-                      /* workaround for bug in Opera */
-                      border-top: thin solid white;
-                    }
+    /* workaround for bug in Opera */
+    border-top: thin solid white;
+}
 
-p                   { text-align: justify; }
+p {
+  text-align: justify;
+}
 
-table                   { background-color: #f5f5f5; }
-th                      { text-align: left; }
-td                      { padding-left: .5em;
+table { background-color: #f5f5f5; }
+th { text-align: left; }
+td { padding-left: .5em;
                           padding-right: 3em;
                           vertical-align: top;
                           border-width: 0px;
                           background-color: white; }
-tr.row1 td              { background-color: #FFFAFA; }
+tr.row1 td { background-color: #FFFAFA; }
 
-pre                     { padding: .5em;
-                          background-color: #F5F5F5;
-                          font-family: Courier;
-                          font-size: smaller;
-                          margin-right: 1em;
-                        }
+pre {
+  padding: .5em;
+  background-color: #F5F5F5;
+  font-family: Courier;
+  font-size: smaller;
+  margin-right: 1em;
+}
 
-a:link                  { color: black; }
-a:hover                 { color: red;   }
+a:link { color: black; }
+a:hover { color: red;   }
 
-ul                      { list-style-type: square; } 
-ul.lessgap              { padding: 0em;
-                          padding-left: .75em;
-                          margin: 0em; }
+ul { list-style-type: square; } 
+ul.lessgap {
+  padding: 0em;
+  padding-left: .75em;
+  margin: 0em;
+}
 
-div.footnotes ol        {
-                          text-align: left;
-                          margin: 0 auto;
-                          width: 100%;
-                          font-size: smaller;
-                          color: gray;
-                          clear: both;
-                          margin-top: 3em;
-                        }
-div.footnotes a         { color: gray;
-                          text-decoration: underline;
-                        }
+div.footnotes ol {
+  text-align: left;
+  margin: 0 auto;
+  width: 100%;
+  font-size: smaller;
+  color: gray;
+  clear: both;
+  margin-top: 3em;
+}
+div.footnotes a {
+  color: gray;
+  text-decoration: underline;
+}
 
 /** Page information in footer **/
 
-div#footer              {
-                          text-align: left;
-                          margin: 0 auto;
+div.tp-footer {
+  text-align: left;
+  margin: 0 auto;
+  
+  width: 45em;
+  
+  clear: both;
+  border-top: 1px black solid;
+  margin-top: 1em;
+  padding-top: .2em;
+}
 
-                          width: 45em;
+div.abstracts .tp-footer {
+  margin-top: 2em;
+}
 
-                          clear: both;
-                          border-top: 1px black solid;
-                          margin-top: 1em;
-                          padding-top: .2em;
-                        }
+.tp-footer .tp-author, .tp-footer .tp-date {
+  font-size: x-small;
+}
 
-div.abstracts #footer   { margin-top: 2em; }
+.tp-footer .tp-author {
+  float: left;
+  width: 16em;
+  font-style: italic;
+}
 
-#footer #author, #footer #date  { font-size: x-small; }
-
-#footer #author         { float: left;
-                          width: 16em;
-                          font-style: italic; }
-
-#footer #date           { float: right;
-                          text-align: right;
-                          width: 38em;
-                          color: silver; }
+.tp-footer .tp-date {
+  float: right;
+  text-align: right;
+  width: 38em;
+  color: silver;
+}
 

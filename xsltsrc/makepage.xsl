@@ -71,9 +71,9 @@
 	    </xsl:apply-templates>
 	  </head>
           <body>
-            <div id="all"><div id="all-inner">
-              <div id="container">
-                <div id="content">
+            <div class="tp-all"><div class="tp-all-inner">
+              <div class="tp-content-container">
+                <div class="tp-content">
                   <xsl:element name="div">
                     <xsl:choose>
 
@@ -106,7 +106,7 @@
                 </div>
 
                 <xsl:if test="not(content/@footer = 'no')">
-                  <div id="footer"><div class="footercontent">
+                  <div class="tp-footer"><div class="tp-footercontent">
                     <xsl:choose>
                       <xsl:when test="/sitepage/author">
                         <xsl:apply-templates select="/sitepage/author"/>
@@ -117,7 +117,7 @@
                       </xsl:otherwise>
                     </xsl:choose>
 
-                    <div id="date">
+                    <div class="tp-footer-date">
                       <xsl:choose>
 
                         <xsl:when test="starts-with(lastmod, '$')">
@@ -167,7 +167,7 @@
 
   <!-- Put the author details in the footer -->
   <xsl:template match="author">
-    <div id="author">Written by:
+    <div class="tp-footer-author">Written by:
 	<xsl:element name="a">
 	    <xsl:attribute name="href">
 		<xsl:value-of select="@href"/>
