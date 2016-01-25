@@ -1,8 +1,14 @@
 /* $Id$ */
 
+#all,
+#all-inner,
+#container {
+    height: 100%;
+}
+
 div#menu                { overflow: auto;
                           height: 100%;
-                          position: absolute;
+                          position: fixed;
 
                           top: 0;
                           left: 0;
