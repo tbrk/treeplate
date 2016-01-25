@@ -117,7 +117,7 @@
                       </xsl:otherwise>
                     </xsl:choose>
 
-                    <span id="date">
+                    <div id="date">
                       <xsl:choose>
 
                         <xsl:when test="starts-with(lastmod, '$')">
@@ -130,7 +130,7 @@
                         </xsl:otherwise>
 
                       </xsl:choose>
-                    </span>
+                    </div>
                   </div></div>
                 </xsl:if>
               </div>
@@ -167,14 +167,14 @@
 
   <!-- Put the author details in the footer -->
   <xsl:template match="author">
-    <span id="author">Written by:
+    <div id="author">Written by:
 	<xsl:element name="a">
 	    <xsl:attribute name="href">
 		<xsl:value-of select="@href"/>
 	    </xsl:attribute>
 	    <xsl:value-of select="text()"/>
 	</xsl:element>
-    </span>
+    </div>
   </xsl:template>
 
 </xsl:stylesheet>
