@@ -42,9 +42,20 @@
       <xsl:when test="$match = 'script' and ./script">
 	<xsl:for-each select="script">
           <xsl:element name="script">
-            <xsl:attribute name="src">
-              <xsl:value-of select="concat($relpath, text())"/>
-            </xsl:attribute>
+            <xsl:for-each select="@*">
+              <xsl:attribute name="{name()}">
+                <xsl:choose>
+                  <xsl:when test="substring(.,1,7) = 'http://'
+                                  or substring(.,1,8) = 'https://'">
+                    <xsl:value-of select="."/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:value-of select="concat($relpath, .)"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:attribute>
+            </xsl:for-each>
+            <xsl:value-of select="text()"/>
           </xsl:element>
 	</xsl:for-each>
       </xsl:when>

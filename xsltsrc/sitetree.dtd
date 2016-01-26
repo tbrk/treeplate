@@ -14,9 +14,10 @@
 <!ELEMENT suffix             (#PCDATA)>
 <!ELEMENT author             (#PCDATA)>
 <!ATTLIST author href        CDATA #REQUIRED>
+<!ATTLIST author media       CDATA #IMPLIED>
 <!ELEMENT style              (#PCDATA)>
 <!ELEMENT script             (#PCDATA)>
-<!ATTLIST author media        CDATA #IMPLIED>
+<!ATTLIST src script         CDATA #IMPLIED>
 <!ELEMENT icon               (#PCDATA)>
 <!ELEMENT header             (#PCDATA)>
 <!ELEMENT name               (#PCDATA)>
