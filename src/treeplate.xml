@@ -26,7 +26,7 @@ rows—<code>class="row0"</code>, <code>class="row1"</code>—so that they can
 be coloured by a stylesheet if desired.
 There is an import feature for inserting generated content, like, for 
 example, this <a href="snespp.html">manual page</a>, and a feature for
-adding footnotes<footnote>Like this one!</footnote>.
+adding footnotes.<footnote>Like this one!</footnote>
 The boilerplate generation makes it easy to experiment with specialized 
 support for troublesome browser software without having to manually edit 
 all pages.
@@ -46,10 +46,10 @@ copy-paste-modify for the common bits, then Treeplate could be for you!</p>
 It may be used and modified without restriction but no guarantees or support are offered.
 Nevertheless, patches, problem reports, and suggestions for improvement (in keeping
 with the minimalist philosophy) are <a
-href="mailto:tbourke@cse.unsw.edu.au">welcomed</a>.</p>
+href="mailto:tim@tbrk.org">welcomed</a>.</p>
 
 <p>The current version is available for download: <a
-	href="treeplate-1.2.0.tar.gz">Treeplate 1.2.0</a> <b>(20080819)</b>.
+	href="../distfiles/treeplate-1.2.2.tar.gz">Treeplate 1.2.2</a> <b>(20090422)</b>.
 It is intended for unix systems and requires a Bourne shell and <a
 href="http://xmlsoft.org/XSLT/xsltproc2.html">xsltproc</a>.
 It should also work with other xslt processors and only requires xslt 1.0,
@@ -57,28 +57,35 @@ xpath 1.0, and the
 <a href="http://www.exslt.org/exsl/elements/document">exsl:document</a> extension.
 </p>
 
+<p>The source code is kept at
+  <a href="https://github.com/tbrk/treeplate">git@github.com:tbrk/treeplate.git</a>.</p>
+
 <h2 id="operation">Operation</h2>
 
-<div class="figure" id="fig_1">
-  <img id="fig_1img" src="treeplate.png"
-   alt="treeplate, inputs: sitetree.xml, sitemaps.xml, outputs: sitemap.xml, sitepages.html"
-   title="Figure 1: Source and destination files" />
-  <div class="caption">
-      <span class="caption">Figure 1:</span> Source and destination files<footnote>
-	<a href="#fig_1">Figure 1</a> uses elements from <a
-		href="http://commons.wikimedia.org/wiki/Image:XSLT_en.svg">Image:XSLT
-		en.svg</a> by Dreftymac.
-	    It is released under a <a
-		href="http://en.wikipedia.org/wiki/Creative_Commons">Creative
-		Commons</a> <a
-		href="http://creativecommons.org/licenses/by/2.5/">Attribution
-		2.5</a> license.
-      </footnote>
-  </div>
+<div class="container-fluid" id="fig_1">
+  <figure class="figure">
+    <img id="fig_1img" src="treeplate.png"
+     alt="treeplate, inputs: sitetree.xml, sitemaps.xml, outputs: sitemap.xml, sitepages.html"
+     title="Figure 1: Source and destination files"
+     class="figure-img img-fluid" />
+    <figcaption class="figure-caption">
+	<span class="caption">Figure 1:</span> Source and destination files<footnote>
+	  <a href="#fig_1">Figure 1</a> uses elements from <a
+		  href="http://commons.wikimedia.org/wiki/Image:XSLT_en.svg">Image:XSLT
+		  en.svg</a> by Dreftymac.
+	      It is released under a <a
+		  href="http://en.wikipedia.org/wiki/Creative_Commons">Creative
+		  Commons</a> <a
+		  href="http://creativecommons.org/licenses/by/2.5/">Attribution
+		  2.5</a> license.
+	</footnote>
+    </figcaption>
+  </figure>
 </div>
 
 <p>Treeplate requires these files and directories:</p>
-<table>
+<div class="in-text">
+<table class="table table-sm">
 <tr><td>src</td>
     <td>Contains <code>sitetree.xml</code> and the content <code>sitepage</code> files.</td>
 </tr>
@@ -96,6 +103,7 @@ xpath 1.0, and the
     into html files in <code>dst</code>.</td>
 </tr>
 </table>
+</div>
 
 <h3 id="sitetree">The sitetree.xml file</h3>
 
@@ -105,7 +113,7 @@ An edited extract from this website is:</p>
 <pre>
 &lt;!DOCTYPE sitetree SYSTEM "sitetree.dtd"&gt;
 &lt;sitetree&gt;
-    &lt;rooturl&gt;http://www.cse.unsw.edu.au/~tbourke&lt;/rooturl&gt;
+    &lt;rooturl&gt;http://www.tbrk.org&lt;/rooturl&gt;
     &lt;prefix&gt;Timothy Bourke - &lt;/prefix&gt;
     &lt;style&gt;basic.css&lt;/style&gt;
     &lt;icon&gt;favicon.ico&lt;/style&gt;
@@ -140,7 +148,8 @@ The latter may be simpler than the former and is expressed by the
 <code>item</code> <code>directory</code> attributes.
 The full list of item attributes is:</p>
 
-<table>
+<div class="in-text">
+<table class="table table-sm">
 <tr><td><code>directory</code></td>
     <td>describes how the files are stored on disk.</td>
 </tr>
@@ -159,10 +168,12 @@ The full list of item attributes is:</p>
     <td>inserted directly into <code>sitemap.xml</code>.</td>
 </tr>
 </table>
+</div>
 
 <p>Each item may contain other items, and must contain two elements:</p>
 
-<table>
+<div class="in-text">
+<table class="table table-sm">
 <tr><td><code>name</code></td>
     <td>Text used in titles and menus.</td>
 </tr>
@@ -178,12 +189,14 @@ The full list of item attributes is:</p>
     accounting for the <code>url</code> attribute's effects.</td>
 </tr>
 </table>
+</div>
 
 <p>Several settings can be set by adding the elements below to an
     <code>item</code>, or to the <code>sitetree</code> itself,
    they are inherited by that branch of the hierarchy:</p>
 
-<table>
+<div class="in-text">
+<table class="table table-sm">
 <tr><td><code>prefix</code></td>
     <td>Text inserted into the page title.</td>
 </tr>
@@ -194,9 +207,11 @@ The full list of item attributes is:</p>
     <td>Author name, with <code>href</code> attribute.</td>
 </tr>
 <tr><td><code>style</code></td>
-    <td>Filename of a css stylesheet. Multiple stylesheets may be given.
-	An optional <code>media</code> attribute is copied through to the
-	generated html.</td>
+    <td>Filename of a css stylesheet.</td>
+</tr>
+<tr><td><code>script</code></td>
+    <td>Optional script which may contain a <code>src</code>
+    attribute containing the url of a script file.</td>
 </tr>
 <tr><td><code>icon</code></td>
     <td>Filename of a page icon.</td>
@@ -212,6 +227,7 @@ The full list of item attributes is:</p>
     Non-inherited keywords can also be specified in the page source files.</td>
 </tr>
 </table>
+</div>
 
 <p>The root <code>sitetree</code> element must contain <code>rooturl</code>, 
 which is required to generate <code>sitemap.xml</code>.
@@ -238,7 +254,8 @@ All other generated links are relative.</p>
 
 <p>The list of all possible <code>sitepage</code> elements:</p>
 
-<table>
+<div class="in-text">
+<table class="table table-sm">
 <tr><td><code>title</code></td>
     <td>The page title.
         An inherited prefix or suffix can be ignored with, respectively, the
@@ -270,9 +287,16 @@ All other generated links are relative.</p>
 	An optional <code>charset</code> attribute allows a charset other
 	than <code>UTF-8</code> to be specified.</td>
 </tr>
+<tr><td><code>style</code></td>
+    <td>Optional filename of a page-specific css stylesheet.</td>
+</tr>
+<tr><td><code>script</code></td>
+    <td>Optional page-specific script. It may contain a <code>src</code>
+    attribute containing the url of a script file.</td>
+</tr>
 <tr><td><code>content</code></td>
     <td>Xhtml content for insertion into the generated page.
-	<ul class="lessgap">
+	<ul>
 	<li>The content is usually wrapped in a <code>div</code> with 
 	<code>id="main"</code>, but the <code>id</code> value can be
 	overridden with a <code>mainid</code> attribute.</li>
@@ -297,6 +321,7 @@ All other generated links are relative.</p>
 	element.</td>
 </tr>
 </table>
+</div>
 
 <p>Sometimes links change when a website is rearranged.
 Redirection pages can be generated by giving <code>title</code> and 

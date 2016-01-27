@@ -177,20 +177,20 @@ div.abstracts .tp-footer {
   margin-top: 2em;
 }
 
-.tp-footer .tp-author, .tp-footer .tp-date {
+.tp-footer .tp-footer-author, .tp-footer .tp-footer-date {
   font-size: x-small;
 }
 
-.tp-footer .tp-author {
+.tp-footer .tp-footer-author {
   float: left;
-  width: 16em;
+  width: 60%;
   font-style: italic;
 }
 
-.tp-footer .tp-date {
+.tp-footer .tp-footer-date {
   float: right;
   text-align: right;
-  width: 38em;
+  width: 40%;
   color: silver;
 }
 
