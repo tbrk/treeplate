@@ -30,6 +30,7 @@
 
   <xsl:template match="/sitepage">
     <xsl:param name="siteitem"/>
+    <xsl:param name="rellinkprefix"/>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <xsl:variable name="sitetree" select="$siteitem/ancestor::sitetree[last()]"/>
@@ -68,6 +69,9 @@
 	  <head>
 	    <xsl:apply-templates mode="makehead" select=".">
 	      <xsl:with-param name="siteitem" select="$siteitem"/>
+	    </xsl:apply-templates>
+	    <xsl:apply-templates mode="backlink" select="style">
+              <!--<xsl:with-param name="relpath" select="$rellinkprefix"/>-->
 	    </xsl:apply-templates>
 	  </head>
           <body>
@@ -145,6 +149,10 @@
               <xsl:apply-templates mode="backlink" select="$siteitem">
                 <xsl:with-param name="match" select="'script'"/>
                 <xsl:with-param name="relpath" select="$siteitem/file/@rellinkprefix"/>
+              </xsl:apply-templates>
+
+              <xsl:apply-templates mode="backlink" select="script">
+                <!--<xsl:with-param name="relpath" select="$rellinkprefix"/>-->
               </xsl:apply-templates>
             </div></div>
           </body>

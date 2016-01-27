@@ -1,6 +1,7 @@
 <!ELEMENT sitepage (title,
 		      ((description, lastmod, keyword*,
-			author?, prepage?, header?, content, postpage?)
+			author?, prepage?, header?, ?style, ?script,
+			content, postpage?)
 		      |redirect
 		      ))>
 <!ELEMENT title       (#PCDATA) >
@@ -11,6 +12,7 @@
 <!ELEMENT keyword     (#PCDATA) >
 <!ELEMENT author      (#PCDATA) >
 <!ATTLIST author href CDATA #REQUIRED >
+<!ELEMENT style       (#PCDATA)>
 <!ELEMENT redirect    (EMPTY) >
 <!ATTLIST redirect href CDATA #REQUIRED >
 <!ELEMENT import      (EMPTY) >
@@ -34,6 +36,10 @@
 <!-- header contains xhtml block elements -->
 <!ELEMENT header      ( %HeadOpts.mix; )+ >
 <!ATTLIST header charset CDATA "UTF-8" >
+
+<!-- page-specific scripts -->
+<!ELEMENT script             (#PCDATA)>
+<!ATTLIST src script         CDATA #IMPLIED>
 
 <!-- footnote contains xhtml block elements -->
 <!ELEMENT footnote    (#PCDATA | %Inline.mix; )* >

@@ -16,6 +16,43 @@
 
   <xsl:include href="makemisc.xsl"/>
 
+  <xsl:template mode="backlink" match="script">
+    <xsl:param name="relpath" />
+
+    <xsl:element name="script">
+      <xsl:for-each select="@*">
+        <xsl:attribute name="{name()}">
+          <xsl:choose>
+            <xsl:when test="substring(.,1,1) = '/'">
+              <xsl:value-of select="concat($relpath,
+                substring(.,2,(string-length(.) - 1)))"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="."/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:attribute>
+      </xsl:for-each>
+      <xsl:value-of select="text()"/>
+    </xsl:element>
+  </xsl:template>
+
+  <xsl:template mode="backlink" match="style">
+    <xsl:param name="relpath" />
+      <xsl:element name="link">
+        <xsl:attribute name="rel">stylesheet</xsl:attribute>
+        <xsl:if test="@media">
+          <xsl:attribute name="media">
+            <xsl:value-of select="@media"/>
+          </xsl:attribute>
+        </xsl:if>
+        <xsl:attribute name="href">
+          <xsl:value-of select="concat($relpath, text())"/>
+        </xsl:attribute>
+        <xsl:attribute name="type">text/css</xsl:attribute>
+      </xsl:element>
+  </xsl:template>
+
   <xsl:template mode="backlink" match="item|sitetree">
     <xsl:param name="relpath" />
     <xsl:param name="match"/>
@@ -23,41 +60,16 @@
     <xsl:choose>
 
       <xsl:when test="$match = 'style' and ./style">
-	<xsl:for-each select="style">
-          <xsl:element name="link">
-            <xsl:attribute name="rel">stylesheet</xsl:attribute>
-	    <xsl:if test="@media">
-	      <xsl:attribute name="media">
-		<xsl:value-of select="@media"/>
-	      </xsl:attribute>
-	    </xsl:if>
-            <xsl:attribute name="href">
-              <xsl:value-of select="concat($relpath, text())"/>
-            </xsl:attribute>
-            <xsl:attribute name="type">text/css</xsl:attribute>
-          </xsl:element>
-	</xsl:for-each>
+        <xsl:apply-templates mode="backlink" select="style">
+          <xsl:with-param name="relpath" select="$relpath"/>
+        </xsl:apply-templates>
       </xsl:when>
 
       <xsl:when test="$match = 'script' and ./script">
-	<xsl:for-each select="script">
-          <xsl:element name="script">
-            <xsl:for-each select="@*">
-              <xsl:attribute name="{name()}">
-                <xsl:choose>
-                  <xsl:when test="substring(.,1,1) = '/'">
-                    <xsl:value-of select="concat($relpath,
-                      substring(.,2,(string-length(.) - 1)))"/>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:value-of select="."/>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </xsl:attribute>
-            </xsl:for-each>
-            <xsl:value-of select="text()"/>
-          </xsl:element>
-	</xsl:for-each>
+        <xsl:apply-templates mode="backlink"
+                             select="script">
+          <xsl:with-param name="relpath" select="$relpath"/>
+        </xsl:apply-templates>
       </xsl:when>
 
       <xsl:when test="$match = 'icon' and icon">

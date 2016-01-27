@@ -108,6 +108,7 @@
 		     indent="yes">
         <xsl:apply-templates select="document(concat($csrcpath, '/', file/text(), '.xml'))">
           <xsl:with-param name="siteitem" select="."/>
+          <xsl:with-param name="rellinkprefix" select="file/@rellinkprefix"/>
         </xsl:apply-templates>
       </exsl:document>
     </xsl:if>
