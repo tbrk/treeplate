@@ -45,12 +45,12 @@
             <xsl:for-each select="@*">
               <xsl:attribute name="{name()}">
                 <xsl:choose>
-                  <xsl:when test="substring(.,1,7) = 'http://'
-                                  or substring(.,1,8) = 'https://'">
-                    <xsl:value-of select="."/>
+                  <xsl:when test="substring(.,1,1) = '/'">
+                    <xsl:value-of select="concat($relpath,
+                      substring(.,2,(string-length(.) - 1)))"/>
                   </xsl:when>
                   <xsl:otherwise>
-                    <xsl:value-of select="concat($relpath, .)"/>
+                    <xsl:value-of select="."/>
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:attribute>
