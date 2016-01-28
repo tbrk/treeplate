@@ -21,6 +21,7 @@
 	      doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"/>
 
   <xsl:include href="makemenu.xsl"/>
+  <xsl:include href="makenav.xsl"/>
   <xsl:include href="makepath.xsl"/>
   <xsl:include href="redirect.xsl"/>
   <xsl:include href="copycontent.xsl"/>
@@ -75,6 +76,20 @@
 	    </xsl:apply-templates>
 	  </head>
           <body>
+            <xsl:for-each select="$sitetree/navbar">
+              <div>
+                <xsl:attribute name="class">
+                  <xsl:value-of select="text()"/>
+                </xsl:attribute>
+                <xsl:apply-templates mode="makenav" select="$sitetree">
+                  <xsl:with-param name="page" select="$itempath"/>
+                  <xsl:with-param name="dirs" select="$dirs"/>
+                  <xsl:with-param name="linkroot"
+                      select="$siteitem/file/@rellinkprefix"/>
+                </xsl:apply-templates>
+              </div>
+            </xsl:for-each>
+
             <div class="tp-all"><div class="tp-all-inner">
               <div class="tp-content-container">
                 <div class="tp-content">

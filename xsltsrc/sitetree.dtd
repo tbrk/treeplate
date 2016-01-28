@@ -1,4 +1,5 @@
-<!ENTITY % itemdata "prefix?, suffix?, author?, style?, script?, icon?, header?, link*, keyword*">
+<!ENTITY % itemdata "prefix?, suffix?, author?, style*, script*, icon?,
+		     ?navbar, header?, link*, keyword*">
 
 <!ELEMENT sitetree           (%itemdata;, rooturl, item*)>
 <!ELEMENT rooturl            (#PCDATA)>
@@ -19,6 +20,7 @@
 <!ELEMENT script             (#PCDATA)>
 <!ATTLIST src script         CDATA #IMPLIED>
 <!ELEMENT icon               (#PCDATA)>
+<!ELEMENT navbar             (#PCDATA)>
 <!ELEMENT header             (#PCDATA)>
 <!ELEMENT name               (#PCDATA)>
 <!ELEMENT file               (#PCDATA)>
