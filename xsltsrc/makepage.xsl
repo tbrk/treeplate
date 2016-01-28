@@ -77,20 +77,6 @@
 	  </head>
           <body>
             <div class="tp-all"><div class="tp-all-inner">
-              <xsl:for-each select="$sitetree/navbar">
-                <div class="tp-navbar-container">
-                  <xsl:attribute name="class">
-                    <xsl:value-of select="concat('navbar ', @class)"/>
-                  </xsl:attribute>
-                  <xsl:apply-templates mode="makenav" select="$sitetree">
-                    <xsl:with-param name="rootname" select="text()"/>
-                    <xsl:with-param name="page" select="$itempath"/>
-                    <xsl:with-param name="dirs" select="$dirs"/>
-                    <xsl:with-param name="linkroot"
-                        select="$siteitem/file/@rellinkprefix"/>
-                  </xsl:apply-templates>
-                </div>
-              </xsl:for-each>
               <div class="tp-content-container">
                 <div class="tp-content">
                   <xsl:element name="div">
@@ -160,6 +146,21 @@
                 <xsl:with-param name="linkroot"
                     select="$siteitem/file/@rellinkprefix"/>
               </xsl:apply-templates>
+
+              <xsl:for-each select="$sitetree/navbar">
+                <div class="tp-navbar-container">
+                  <xsl:attribute name="class">
+                    <xsl:value-of select="concat('navbar ', @class)"/>
+                  </xsl:attribute>
+                  <xsl:apply-templates mode="makenav" select="$sitetree">
+                    <xsl:with-param name="rootname" select="text()"/>
+                    <xsl:with-param name="page" select="$itempath"/>
+                    <xsl:with-param name="dirs" select="$dirs"/>
+                    <xsl:with-param name="linkroot"
+                        select="$siteitem/file/@rellinkprefix"/>
+                  </xsl:apply-templates>
+                </div>
+              </xsl:for-each>
 
               <xsl:apply-templates mode="backlink" select="$siteitem">
                 <xsl:with-param name="match" select="'script'"/>

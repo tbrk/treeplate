@@ -29,6 +29,7 @@
     <xsl:param name="linkroot"/>
 
     <div xmlns="http://www.w3.org/1999/xhtml" class="container-fluid">
+      <h2 style="display: none">Navigation Links</h2>
       <ul class="tp-nav nav navbar-nav">
         <li class="nav-item dropdown">
           <a class="dropdown-toggle nav-link"
