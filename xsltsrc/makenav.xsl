@@ -191,7 +191,10 @@
     <xsl:param name="rpath"/>
     <xsl:param name="linkroot"/>
     <xsl:element name="a">
-      <xsl:attribute name="class">dropdown-item button</xsl:attribute>
+      <xsl:attribute name="class"
+        >dropdown-item button<xsl:if test="@homelink = 'yes'"
+          > tp-navbar-home</xsl:if>
+      </xsl:attribute>
       <xsl:if test="file">
           <xsl:choose>
             <xsl:when test="@directory">
