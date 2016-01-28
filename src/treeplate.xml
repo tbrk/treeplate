@@ -294,6 +294,10 @@ All other generated links are relative.</p>
     <td>Optional page-specific script. It may contain a <code>src</code>
     attribute containing the url of a script file.</td>
 </tr>
+<tr><td><code>navbar</code></td>
+  <td>Optionally construct a navigation bar on each page using the given
+    text as the first label. A <code>class</code> attribute is permitted.</td>
+</tr>
 <tr><td><code>content</code></td>
     <td>Xhtml content for insertion into the generated page.
 	<ul>

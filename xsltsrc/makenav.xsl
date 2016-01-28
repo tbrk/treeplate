@@ -23,6 +23,7 @@
 	dirs	    node sequence of @directory attributes
   -->
   <xsl:template mode="makenav" match="sitetree">
+    <xsl:param name="rootname"/>
     <xsl:param name="page"/>
     <xsl:param name="dirs"/>
     <xsl:param name="linkroot"/>
@@ -34,7 +35,9 @@
                       data-toggle="dropdown"
                       role="button"
                       aria-haspopup="true"
-                      aria-expanded="false">&#x2605;</a>
+                      aria-expanded="false">
+            <xsl:value-of select="$rootname"/>
+          </a>
           <div class="dropdown-menu">
             <xsl:apply-templates select="item[not(@inmenu = 'no')]"
                                  mode="siblingitem">

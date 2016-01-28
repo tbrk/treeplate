@@ -21,6 +21,7 @@
 <!ATTLIST src script         CDATA #IMPLIED>
 <!ELEMENT icon               (#PCDATA)>
 <!ELEMENT navbar             (#PCDATA)>
+<!ATTLIST navbar class       CDATA #REQUIRED>
 <!ELEMENT header             (#PCDATA)>
 <!ELEMENT name               (#PCDATA)>
 <!ELEMENT file               (#PCDATA)>
