@@ -31,11 +31,19 @@
     <div xmlns="http://www.w3.org/1999/xhtml" class="container-fluid">
       <ul class="tp-nav nav navbar-nav">
         <li class="nav-item dropdown">
-          <a href="#" class="dropdown-toggle nav-link"
-                      data-toggle="dropdown"
-                      role="button"
-                      aria-haspopup="true"
-                      aria-expanded="false">
+          <a class="dropdown-toggle nav-link"
+             data-toggle="dropdown"
+             role="button"
+             aria-haspopup="true"
+             aria-expanded="false">
+            <xsl:apply-templates select="item[@homelink = 'yes']"
+                                 mode="siblinghref">
+              <xsl:with-param name="path" select="$page"/>
+              <xsl:with-param name="rpath">
+                <xsl:apply-templates select="$dirs"/>
+              </xsl:with-param>
+              <xsl:with-param name="linkroot" select="$linkroot"/>
+            </xsl:apply-templates>
             <xsl:value-of select="$rootname"/>
           </a>
           <div class="dropdown-menu">
@@ -203,6 +211,30 @@
       </xsl:if>
       <xsl:value-of select="name"/>
     </xsl:element>
+  </xsl:template>
+
+  <!-- href attribute to sibling -->
+  <xsl:template match="item" mode="siblinghref">
+    <xsl:param name="path"/>
+    <xsl:param name="rpath"/>
+    <xsl:param name="linkroot"/>
+    <xsl:if test="file">
+        <xsl:choose>
+          <xsl:when test="@directory">
+            <xsl:apply-templates mode="makehref" select="file">
+              <xsl:with-param name="path"
+                              select="concat($linkroot, $rpath,
+                                             @directory, '/')"/>
+            </xsl:apply-templates>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates mode="makehref" select="file">
+              <xsl:with-param name="path"
+                              select="concat($linkroot, $rpath)"/>
+            </xsl:apply-templates>
+          </xsl:otherwise>
+        </xsl:choose>
+    </xsl:if>
   </xsl:template>
 
 </xsl:stylesheet>
