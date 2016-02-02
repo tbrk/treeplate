@@ -57,7 +57,7 @@
     <xsl:element name="meta">
       <xsl:attribute name="name">description</xsl:attribute>
       <xsl:attribute name="content">
-        <xsl:value-of select="description"/>
+        <xsl:value-of select="normalize-space(description)"/>
       </xsl:attribute>
     </xsl:element>
 
