@@ -49,4 +49,28 @@
     </xsl:attribute>
   </xsl:template>
 
+  <xsl:template mode="maketexthref" match="file">
+    <xsl:param name="path"/>
+
+    <xsl:variable name="extension">
+      <xsl:choose>
+	<xsl:when test="not(@extension)">
+	  <xsl:text>.html</xsl:text>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:value-of select="concat('.', @extension)"/>
+	</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+
+    <xsl:choose>
+    <xsl:when test="@url">
+      <xsl:value-of select="@url"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="concat($path, current(), $extension)"/>
+    </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
 </xsl:stylesheet>

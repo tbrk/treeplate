@@ -22,6 +22,7 @@
 
   <xsl:include href="makemenu.xsl"/>
   <xsl:include href="makenav.xsl"/>
+  <xsl:include href="makecrumbs.xsl"/>
   <xsl:include href="makepath.xsl"/>
   <xsl:include href="redirect.xsl"/>
   <xsl:include href="copycontent.xsl"/>
@@ -171,6 +172,10 @@
                 <!--<xsl:with-param name="relpath" select="$rellinkprefix"/>-->
               </xsl:apply-templates>
             </div></div>
+            <xsl:apply-templates mode="makecrumbs" select="$sitetree">
+              <xsl:with-param name="rooturl" select="$sitetree/rooturl/text()"/>
+              <xsl:with-param name="page" select="$itempath"/>
+            </xsl:apply-templates>
           </body>
         </xsl:when>
 
