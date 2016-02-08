@@ -99,6 +99,13 @@
         </lastmod>
       </xsl:when>
 
+      <xsl:when test="starts-with(lastmod, 'LastChangedDate: ')">
+        <lastmod>
+          <xsl:value-of
+	    select="substring-before(substring-after(lastmod, 'LastChangedDate: '), ' ')"/>
+        </lastmod>
+      </xsl:when>
+
       <xsl:when test="lastmod">
 	<lastmod><xsl:value-of select="lastmod/text()"/></lastmod>
       </xsl:when>
