@@ -8,7 +8,7 @@ boilerplate XHTML for
 * headers, including stylesheet, icon, and
   [relation links](http://www.w3.org/TR/REC-html40/struct/links.html#h-12.1.2),
 * footers, including author and last changed date,
-* a hierarchical menu bar without scripting, like the one at left, and
+* a hierarchical menu bar without scripting, and
 * a [sitemap](http://www.sitemaps.org) file for search engines.
 
 These scripts are rather dated but I still find them useful for my
