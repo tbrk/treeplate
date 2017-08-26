@@ -28,13 +28,12 @@
     <xsl:param name="dirs"/>
     <xsl:param name="linkroot"/>
 
-    <div xmlns="http://www.w3.org/1999/xhtml" class="container-fluid">
+    <div xmlns="http://www.w3.org/1999/xhtml"  id="navbarSupportedContent">
       <h2 style="display: none">Navigation Links</h2>
-      <ul class="tp-nav nav navbar-nav">
+      <ul class="nav tp-nav">
         <li class="nav-item dropdown">
-          <a class="dropdown-toggle nav-link"
+          <a class="nav-link dropdown-toggle"
              data-toggle="dropdown"
-             role="button"
              aria-haspopup="true"
              aria-expanded="false">
             <xsl:apply-templates select="item[@homelink = 'yes']"
